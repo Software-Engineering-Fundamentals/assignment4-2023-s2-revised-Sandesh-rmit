@@ -16,8 +16,41 @@ import java.util.Date;
  * Initialize the test object with "setting" method.
  */
 public class IssueBook {
-	
-	
 
+    @BeforeEach
+    void initial(){
+    Student student = new Student("Smith hf", 10);
+    Date issued = new Date();
+    Date expiry = new Date();
 
+    LibraryCard libraryCard = new LibraryCard(student, issued, expiry, 3945006);
+    Book book = new Book(1, "Lupin", 1);
+    }
+
+    @Test
+    void check_numBooks(){
+        assertEquals(4, libraryCard.borrowed.size());
+
+    }
+
+    // @Test
+    // void check_isBookBorrowed(){
+
+    // }
+
+    // @Test
+    // void check_cardValid(){
+
+    // }
+
+    // @Test
+    // void check_bookAvailable(){
+
+    // }
+
+    // @Test
+    // void check_Fine(){
+
+    // }
+	
 }

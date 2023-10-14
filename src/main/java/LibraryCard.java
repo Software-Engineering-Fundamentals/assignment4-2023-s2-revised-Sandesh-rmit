@@ -7,34 +7,23 @@ import java.util.List;
  * Library Card associated with the Student 
  */
 public class LibraryCard {
-    /**
-     * Card id 
-     */
+    //Card id 
     private int ID;
 
-    /**
-     * Issue Date of the Card
-     */
+    //Issue Date of the Card
     private Date IssueDate;
 
-    /**
-     * Expiry Date of the Card
-     */
-    private Date ExpiryDate;
+    // Expiry Date of the Card
+   private Date ExpiryDate;
 
-    /**
-     * Number of books borrowed
-     */
+    //Number of books borrowed
+
     private List<Book> borrowed = new ArrayList<Book>();
 
-    /**
-     * Fine asscoaited with the card
-     */
+    // Fine asscoaited with the card
     private double fine;
 
-    /**
-     *  Details about the cardholder
-     */
+    //Details about the cardholder
     private Student student;
 
 
@@ -43,8 +32,8 @@ public class LibraryCard {
     public LibraryCard(Student student, Date IssueDate, Date ExpiryDate, int ID) {
         this.student = student;
         this.IssueDate = IssueDate;
-	   this.ExpiryDate = ExpiryDate;
-	   this.ID = ID;
+	    this.ExpiryDate = ExpiryDate;
+	    this.ID = ID;
     }
 
 
@@ -86,20 +75,48 @@ public class LibraryCard {
         return borrowed;
     }
 
-    
-
     /**
      * Issue a new book
      * @param Book: book to borrow 
      * @return true if the book is successfully borrowed, false otherwise
+     * @throws IllegalBookIssueException
      */
 
-    public boolean issueBook(Book book){
-    	return false;
+    public boolean issueBook(Book book) throws IllegalBookIssueException{
+        if(borrowed.size() > 4){
+            return false;
+        }//number of books
+
+        if(borrowed.contains(book)){
+            throw new IllegalBookIssueException("Book is already issued out");
+        }//if books is issued
+
+        if(this.ExpiryDate.compareTo(this.IssueDate) < 0){
+            return false;
+        }//library card expiry
+
+        if(book.getStatus() == false){
+            return false;
+        }//book availability
+
+        if(fine > 0){
+            return false;
+        }//fine on book?
+        
+        // if constrains is met 
+        int demand = book.getDemand();
+
+        if(demand == 1){
+            book.setDays(3);
+        }else{
+            book.setDays(15);
+        }
+
+        borrowed.add(book);
+ 
+    	return true;
    
     }
-
-
 
 
 }
