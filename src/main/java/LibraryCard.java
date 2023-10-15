@@ -104,7 +104,7 @@ public class LibraryCard {
         }//fine on book?
         
         // if constrains is met 
-        int demand = book.getDemand();
+        int demand = book.getDemand(); // get demand of book to get return date (3 or 15 days)
 
         if(demand == 1){
             book.setDays(3);
@@ -113,7 +113,7 @@ public class LibraryCard {
         }
         
         book.setStatus(true); // initially book is available
-        borrowed.add(book);
+        borrowed.add(book);// add book to list to ensure this library card cant borrow the same book until returned
         book.setStatus(false); // not available after borrowing the book
 
 
