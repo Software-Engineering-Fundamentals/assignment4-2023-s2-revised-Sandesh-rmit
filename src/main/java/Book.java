@@ -47,17 +47,13 @@ public class Book {
         this.ID = ID;
     }
     
-   
-
     public void setTitle(String title) {
         this.title = title;
     }
 
-
     public String getTitle() {
         return this.title;
     }
-
 
     public int days() {
         return days;
@@ -71,11 +67,8 @@ public class Book {
         return status;
     }
 
-    public void setDemand(boolean status) {
+    public void setStatus(boolean status) {
         this.status = status;
-    }
-
-
-
+    }// changed this from setDemand(repeated method) to setStatus to ensure that status of book can be changed
 
 }

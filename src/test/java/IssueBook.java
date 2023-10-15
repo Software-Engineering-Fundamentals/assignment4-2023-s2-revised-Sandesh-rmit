@@ -4,7 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Date;
 
 /**
@@ -16,41 +19,92 @@ import java.util.Date;
  * Initialize the test object with "setting" method.
  */
 public class IssueBook {
+    private Student student;
+    private LibraryCard libraryCard;
+    private Book book;
 
     @BeforeEach
     void initial(){
-    Student student = new Student("Smith hf", 10);
+    this.student = new Student("Frederico", 3945006);
     Date issued = new Date();
     Date expiry = new Date();
 
-    LibraryCard libraryCard = new LibraryCard(student, issued, expiry, 3945006);
-    Book book = new Book(1, "Lupin", 1);
+    this.libraryCard = new LibraryCard(student, issued, expiry, 1011);
+    this.book = new Book(125, "Harry Potter and the Chamber of Secrets", 1);
+    
     }
 
     @Test
     void check_numBooks(){
-        assertEquals(4, libraryCard.borrowed.size());
+        libraryCard.getBooks().add(new Book(1, "Book 1", 1));
+        libraryCard.getBooks().add(new Book(2, "Book 2", 1));
+        libraryCard.getBooks().add(new Book(3, "Book 3", 1));
+        libraryCard.getBooks().add(new Book(4, "Book 4", 1));
 
+
+        assertEquals(4, libraryCard.getBooks().size(), "Exceeded amount");
+
+    }//test the number of books borrowed from a single libray card
+
+    @Test
+    void check_isBookBorrowed() throws IllegalBookIssueException{
+        assertFalse(libraryCard.getBooks().contains(book),"This book is not issued on the library card");
+
+        libraryCard.issueBook(book);
+
+        assertTrue(libraryCard.getBooks().contains(book),"The same book is already issued on the library card");
+
+
+
+    }//check if student is borrowing the same book
+
+    @Test
+    void check_cardValid(){
+        assertTrue(libraryCard.getIssueDate().compareTo(libraryCard.getExpiryDate()) <= 0, 
+        "Library card is valid" );
     }
 
-    // @Test
-    // void check_isBookBorrowed(){
+    @Test
+    void check_bookAvailable() throws IllegalBookIssueException{
+        assertTrue(book.getStatus(), "Book is available");
 
-    // }
+        libraryCard.issueBook(book);
 
-    // @Test
-    // void check_cardValid(){
+        assertFalse(book.getStatus(), "Book is not available");
+    }
 
-    // }
+    @Test
+    void check_fineOnLibraryCard(){
+        assertFalse(libraryCard.getFine() < 0, "No pending fines on this library card"); 
 
-    // @Test
-    // void check_bookAvailable(){
+        libraryCard.setFine(5.5);
 
-    // }
-
-    // @Test
-    // void check_Fine(){
-
-    // }
+        assertTrue(libraryCard.getFine() > 0, "Pending fines are associated with this library card");
+    }
 	
+    @Test
+    void check_demandLevel(){
+
+        assertEquals(1, book.getDemand(), "Book is in high demand");
+ 
+    }
+
+
+    @Test
+    void getStudentId(){
+        assertEquals(3945006, student.getId(), "Student ID is linked");
+    }
+
+    @Test
+    void getBookName(){
+        assertEquals("Harry Potter and the Chamber of Secrets", book.getTitle(), "Correct book name");
+    }
+
+    @Test   
+    void getBookId(){
+        assertEquals( 125, book.getID(), "Correct book ID");
+    }
+
+
+
 }

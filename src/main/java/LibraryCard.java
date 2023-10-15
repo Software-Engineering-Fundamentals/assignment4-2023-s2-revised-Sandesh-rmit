@@ -18,7 +18,7 @@ public class LibraryCard {
 
     //Number of books borrowed
 
-    private List<Book> borrowed = new ArrayList<Book>();
+    List<Book> borrowed = new ArrayList<Book>();
 
     // Fine asscoaited with the card
     private double fine;
@@ -111,11 +111,13 @@ public class LibraryCard {
         }else{
             book.setDays(15);
         }
-
+        
+        book.setStatus(true); // initially book is available
         borrowed.add(book);
- 
+        book.setStatus(false); // not available after borrowing the book
+
+
     	return true;
-   
     }
 
 
