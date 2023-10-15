@@ -32,7 +32,7 @@ public class IssueBook {
     this.libraryCard = new LibraryCard(student, issued, expiry, 1011);
     this.book = new Book(125, "Harry Potter and the Chamber of Secrets", 1);
     
-    }
+    }// initialising student info, issued/expiry dates of library card, libraryCard info, book info
 
     @Test
     void check_numBooks(){
@@ -54,15 +54,14 @@ public class IssueBook {
 
         assertTrue(libraryCard.getBooks().contains(book),"The same book is already issued on the library card");
 
-
-
     }//check if student is borrowing the same book
 
     @Test
     void check_cardValid(){
         assertTrue(libraryCard.getIssueDate().compareTo(libraryCard.getExpiryDate()) <= 0, 
         "Library card is valid" );
-    }
+
+    }// checking if card is valid by comparing issue date and expiry date
 
     @Test
     void check_bookAvailable() throws IllegalBookIssueException{
@@ -71,7 +70,8 @@ public class IssueBook {
         libraryCard.issueBook(book);
 
         assertFalse(book.getStatus(), "Book is not available");
-    }
+
+    }// checking if getStatus() is storing and outputting the right information
 
     @Test
     void check_fineOnLibraryCard(){
@@ -80,27 +80,32 @@ public class IssueBook {
         libraryCard.setFine(5.5);
 
         assertTrue(libraryCard.getFine() > 0, "Pending fines are associated with this library card");
-    }
+
+    }// checking if getfine() are storing and read properly
 	
     @Test
     void check_demandLevel(){
         assertEquals(1, book.getDemand(), "Book is in high demand");
-    }
+
+    }// checking for correct demand level
 
     @Test
     void getStudentId(){
         assertEquals(3945006, student.getId(), "Student ID is linked");
-    }
+
+    }// checking if student number is read corrrectly
 
     @Test
     void getBookName(){
         assertEquals("Harry Potter and the Chamber of Secrets", book.getTitle(), "Correct book name");
-    }
+
+    }// checking if the book name is read correctly
 
     @Test   
     void getBookId(){
         assertEquals(125, book.getID(), "Correct book ID");
-    }
+
+    }//checking if Book ID is read correctly
 
 
 
