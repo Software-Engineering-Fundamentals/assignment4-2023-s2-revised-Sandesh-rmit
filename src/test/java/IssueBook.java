@@ -26,8 +26,8 @@ public class IssueBook {
     @BeforeEach
     void initial(){
     this.student = new Student("Frederico", 3945006);
-    Date issued = new Date();
-    Date expiry = new Date();
+    Date issued = new Date();// get date of current time
+    Date expiry = new Date();//get date after Date issued
 
     this.libraryCard = new LibraryCard(student, issued, expiry, 1011);
     this.book = new Book(125, "Harry Potter and the Chamber of Secrets", 1);
@@ -84,11 +84,8 @@ public class IssueBook {
 	
     @Test
     void check_demandLevel(){
-
         assertEquals(1, book.getDemand(), "Book is in high demand");
- 
     }
-
 
     @Test
     void getStudentId(){
@@ -102,7 +99,7 @@ public class IssueBook {
 
     @Test   
     void getBookId(){
-        assertEquals( 125, book.getID(), "Correct book ID");
+        assertEquals(125, book.getID(), "Correct book ID");
     }
 
 
