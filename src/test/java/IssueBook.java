@@ -41,7 +41,6 @@ public class IssueBook {
         libraryCard.getBooks().add(new Book(3, "Book 3", 1));
         libraryCard.getBooks().add(new Book(4, "Book 4", 1));
 
-
         assertEquals(4, libraryCard.getBooks().size(), "Exceeded amount");
 
     }//test the number of books borrowed from a single libray card
